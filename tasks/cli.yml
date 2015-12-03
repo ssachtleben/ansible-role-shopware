@@ -1,0 +1,31 @@
+- stat: path=/tmp/sw-cli-tools
+  register: swcliDirectory
+
+- name: Ensure git is installed
+  tags: shopware
+  apt: name=git state=present
+  when: swcliDirectory.stat.isdir is not defined or not swcliDirectory.stat.isdir
+
+- name: Clone repository sw-cli-tools from Github
+  tags: shopware
+  git: repo=https://github.com/shopwareLabs/sw-cli-tools.git dest=/tmp/sw-cli-tools recursive=false ssh_opts="-o StrictHostKeyChecking=no"
+  when: swcliDirectory.stat.isdir is not defined or not swcliDirectory.stat.isdir
+
+- name: Create .composer dir
+  command: composer self-update
+  args:
+    creates: ~/.composer
+  when: swcliDirectory.stat.isdir is not defined or not swcliDirectory.stat.isdir
+
+- name: Configure Github OAuth token
+  template:
+    src: ".composer/auth.json.j2"
+    dest: "~/.composer/auth.json"
+  when: swcliDirectory.stat.isdir is not defined or not swcliDirectory.stat.isdir
+
+- name: Install sw-cli-tools
+  tags: shopware
+  command: composer install chdir=/tmp/sw-cli-tools
+  environment:
+    HOME: "/root"
+  when: swcliDirectory.stat.isdir is not defined or not swcliDirectory.stat.isdir

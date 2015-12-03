@@ -1,0 +1,2 @@
+- include: cli.yml tags=shopware
+- include: install.yml tags=shopware

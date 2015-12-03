@@ -1,0 +1,10 @@
+shopware_sw_download_host: "https://raw.githubusercontent.com/marcharding/oxrun/master"
+shopware_sw_executable: "sw"
+
+shopware_version: "latest"
+shopware_root: "/var/www/shopware"
+
+shopware_webuser: "www-data"
+shopware_webgroup: "www-data"
+
+shopware_config: []
