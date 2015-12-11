@@ -1,22 +1,19 @@
 - name: Check if shopware root exists
-  stat: path={{ shopware_root }}
-  register: shopwareDirectory
+  tags: shopware
+  stat: path={{ shopware_root }}/shopware.php
+  register: shopwareFile
+
+- name: Creates shopware directory
+  tags: shopware
+  file: path={{ shopware_root }} state=directory
+  when: not shopwareFile.stat.exists
 
 - name: Install Shopware shop
   tags: shopware
-  command: "./sw install:release --release=latest --installDir=/latest --basePath={{ shopware_root }} --databaseName=shopware --username=shopware --password=shopware --name=Styla --mail=support@styla.com --language=de_DE chdir=/tmp/sw-cli-tools/bin"
-  when: shopwareDirectory.stat.isdir is not defined or not shopwareDirectory.stat.isdir
-
-- name: Move to Shopware root directory
-  tags: shopware
-  command:
-    "rsync -av
-    -p --chmod=Du=rwx --chmod=Dg=rx --chmod=Do= --chmod=Fu=rw --chmod=Fg=r --chmod=Fo=
-    /tmp/sw-cli-tools/bin/latest/
-    {{ shopware_root }}/"
-  when: shopwareDirectory.stat.isdir is not defined or not shopwareDirectory.stat.isdir
+  command: sw install:release --release="{{ shopware_version }}" --installDir="." --basePath="{{ shopware_config.shop_url }}" --databaseName="shopware" --username="shopware" --password="shopware" --name="Styla" --mail="support@styla.com" --language="de_DE" chdir="{{ shopware_root }}"
+  when: not shopwareFile.stat.exists
 
 - name: Change owner and group for whole www folder since its root
   tags: shopware
   file: path={{ shopware_root }} owner=www-data group=www-data state=directory recurse=true
-  when: shopwareDirectory.stat.isdir is not defined or not shopwareDirectory.stat.isdir
+  when: not shopwareFile.stat.exists

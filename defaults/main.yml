@@ -1,4 +1,5 @@
 shopware_sw_download_host: "https://raw.githubusercontent.com/marcharding/oxrun/master"
+shopware_sw_directory: "/tmp/sw-cli-tools"
 shopware_sw_executable: "sw"
 
 shopware_version: "latest"
