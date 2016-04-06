@@ -8,4 +8,6 @@ shopware_root: "/var/www/shopware"
 shopware_webuser: "www-data"
 shopware_webgroup: "www-data"
 
+shopware_github_token: ""
+
 shopware_config: []
