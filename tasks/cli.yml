@@ -8,6 +8,11 @@
   apt: name=git state=present
   when: swcliDirectory.stat.isdir is not defined or not swcliDirectory.stat.isdir
 
+- name: Set Github Oauth Token for composer update
+  tags: shopware
+  command: composer config --global github-oauth.github.com {{ shopware_github_token }}
+  when: swcliDirectory.stat.isdir is not defined or not swcliDirectory.stat.isdir
+
 - name: Clone repository sw-cli-tools from Github
   tags: shopware
   git: repo=https://github.com/shopwareLabs/sw-cli-tools.git dest="{{ shopware_sw_directory }}" recursive=false ssh_opts="-o StrictHostKeyChecking=no"

@@ -30,7 +30,6 @@ dependencies:
   - role: ssachtleben.apache-mcrypt
 
   - role: geerlingguy.composer
-    composer_github_oauth_token: "98e2831c1b2dfec6f2c10cb34968bb6ce6338986"
 
   - role: geerlingguy.mysql
 
