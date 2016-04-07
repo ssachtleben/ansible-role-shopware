@@ -16,12 +16,10 @@ Configurate shopware installation with the following defaults:
 ```
 shopware_config:
 	shop_url: "http://shopware.local/"
-   db_host: "localhost"
-   db_name: "shopware"
-   db_user: "root"
-   db_pass: "root"
-   admin_email: "admin@email.com"
-   admin_pass: "password"
+   	db_name: "shopware"
+	admin_name: "admin"
+   	admin_email: "admin@email.com"
+   	admin_pass: "password"
 ```
 
 ## License
