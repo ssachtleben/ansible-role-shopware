@@ -10,7 +10,7 @@
 
 - name: Install Shopware shop
   tags: shopware
-  command: sw install:release --release="{{ shopware_version }}" --installDir="." --basePath="{{ shopware_config.shop_url }}" --databaseName="shopware" --username="shopware" --password="shopware" --name="Styla" --mail="support@styla.com" --language="de_DE" chdir="{{ shopware_root }}"
+  command: sw install:release --release="{{ shopware_version }}" --installDir="." --basePath="{{ shopware_config.shop_url }}" --databaseName="{{ shopware_config.db_name }}" --username="{{ shopware_config.admin_name }}" --password="{{ shopware_config.admin_pass }}" --name="{{ shopware_config.admin_name }}" --mail="{{ shopware_config.admin_email }}" --language="de_DE" chdir="{{ shopware_root }}"
   when: not shopwareFile.stat.exists
 
 - name: Change owner and group for whole www folder since its root
