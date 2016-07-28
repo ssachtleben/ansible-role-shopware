@@ -15,7 +15,7 @@ Configurate shopware installation with the following defaults:
 
 ```
 shopware_config:
-	shop_url: "http://shopware.local/"
+	host: "shopware.local"
    	db_name: "shopware"
 	admin_name: "admin"
    	admin_email: "admin@email.com"
