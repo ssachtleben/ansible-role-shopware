@@ -10,7 +10,7 @@
 
 - name: Install Shopware shop
   tags: shopware
-  command: sw install:release --release="{{ shopware_version }}" --install-dir="." --shop-host="{{ shopware_config.host }}" --db-host="{{ shopware_config.db_host }}" --db-user="{{ shopware_config.db_user }}" --db-password="{{ shopware_config.db_pass }}" --db-name="{{ shopware_config.db_name }}" --admin-username="{{ shopware_config.admin_name }}" --admin-password="{{ shopware_config.admin_pass }}" --admin-name="{{ shopware_config.admin_name }}" --admin-email="{{ shopware_config.admin_email }}" chdir="{{ shopware_root }}"
+  command: sw install:release --release="{{ shopware_version }}" --install-dir="." --shop-host="{{ shopware_config.host }}" --shop-path="/" --db-host="{{ shopware_config.db_host }}" --db-user="{{ shopware_config.db_user }}" --db-password="{{ shopware_config.db_pass }}" --db-name="{{ shopware_config.db_name }}" --admin-username="{{ shopware_config.admin_name }}" --admin-password="{{ shopware_config.admin_pass }}" --admin-name="{{ shopware_config.admin_name }}" --admin-email="{{ shopware_config.admin_email }}" chdir="{{ shopware_root }}"
   when: not shopwareFile.stat.exists
 
 - name: Change owner and group for whole www folder since its root
